@@ -1,8 +1,8 @@
 import Handlebars from 'handlebars';
 import fs from 'fs-extra';
 import path from 'path';
-import { registerHelpers } from './helpers';
-import { TemplateContext } from '../../models/config';
+import { registerHelpers } from './helpers.js';
+import { TemplateContext } from '../../models/config.js';
 
 /**
  * Template Engine responsável por renderizar templates Handlebars

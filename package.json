@@ -1,10 +1,11 @@
 {
-  "name": "kibernus",
+  "name": "kybernus",
   "version": "0.1.0",
+  "type": "module",
   "description": "Open Core CLI for scaffolding production-ready backend and fullstack projects",
   "main": "dist/index.js",
   "bin": {
-    "kibernus": "dist/index.js"
+    "kybernus": "dist/index.js"
   },
   "scripts": {
     "build": "rimraf dist && tsc",
@@ -33,7 +34,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/vinitrevisan/kibernus"
+    "url": "https://github.com/vinitrevisan/kybernus"
   },
   "engines": {
     "node": ">=18.0.0"
@@ -48,6 +49,7 @@
     "@clack/prompts": "^0.11.0",
     "@google/generative-ai": "^0.24.1",
     "commander": "^14.0.2",
+    "conf": "^15.0.2",
     "fs-extra": "^11.3.3",
     "handlebars": "^4.7.8"
   },

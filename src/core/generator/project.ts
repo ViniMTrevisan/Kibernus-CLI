@@ -1,9 +1,16 @@
 import path from 'path';
+import { fileURLToPath } from 'url';
 import fs from 'fs-extra';
+import { exec } from 'child_process';
+import { promisify } from 'util';
 import * as clack from '@clack/prompts';
-import { ProjectConfig } from '../../models/config';
-import { TemplateEngine } from '../templates/engine';
-import { buildTemplateContext } from './context-builder';
+import { ProjectConfig } from '../../models/config.js';
+import { TemplateEngine } from '../templates/engine.js';
+import { buildTemplateContext } from './context-builder.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const execPromise = promisify(exec);
 
 /**
  * Gera projetos a partir de templates
@@ -49,6 +56,9 @@ export class ProjectGenerator {
             // 4. Renderiza todos os templates
             await this.engine.renderTree(templatePath, projectPath, context);
 
+            // 5. Post-generation hooks (Java wrappers, etc)
+            await this.runPostGenerationHooks(config, projectPath);
+
             spinner.stop('✅ Projeto gerado com sucesso!');
 
             // 5. Mostra próximos passos
@@ -71,7 +81,13 @@ export class ProjectGenerator {
         const tier = config.licenseTier;
         const stack = config.stack;
 
-        return path.join(templatesRoot, stack, tier);
+        // For stacks that support architectures (backend stacks)
+        // Path: templates/<stack>/<tier>/<architecture>
+        // For stacks without architecture (e.g., nextjs)
+        // Path: templates/<stack>/<tier>/default
+        const architecture = config.architecture || 'default';
+
+        return path.join(templatesRoot, stack, tier, architecture);
     }
 
     /**
@@ -124,6 +140,51 @@ export class ProjectGenerator {
                     install: 'Veja o README.md',
                     run: 'Veja o README.md',
                 };
+        }
+    }
+
+    /**
+     * Executa hooks pós-geração (ex: instalar wrappers do Maven/Gradle)
+     */
+    private async runPostGenerationHooks(config: ProjectConfig, projectPath: string): Promise<void> {
+        // Hook específico para Java Spring Boot
+        if (config.stack === 'java-spring') {
+            await this.installJavaBuildWrapper(config, projectPath);
+        }
+    }
+
+    /**
+     * Instala o build wrapper (Maven ou Gradle) para projetos Java
+     */
+    private async installJavaBuildWrapper(config: ProjectConfig, projectPath: string): Promise<void> {
+        const buildTool = config.buildTool || 'maven';
+
+        try {
+            if (buildTool === 'maven') {
+                // Usa mvn wrapper:wrapper para gerar os arquivos do wrapper
+
+                // Verifica se Maven está instalado
+                try {
+                    await execPromise('mvn --version');
+                } catch {
+                    console.warn('⚠️  Maven não encontrado. Wrapper não será instalado.');
+                    console.warn('   Instale Maven ou use o comando: mvn wrapper:wrapper');
+                    return;
+                }
+
+                // Gera o wrapper
+                await execPromise('mvn wrapper:wrapper', { cwd: projectPath });
+
+                // Define permissões de execução no mvnw
+                await fs.chmod(path.join(projectPath, 'mvnw'), 0o755);
+            } else if (buildTool === 'gradle') {
+                // TODO: Implementar Gradle wrapper quando suportarmos Gradle
+                console.warn('⚠️  Gradle wrapper ainda não implementado');
+            }
+        } catch (error) {
+            // Não falha a geração do projeto se o wrapper falhar
+            console.warn(`⚠️  Erro ao instalar ${buildTool} wrapper:`, error);
+            console.warn(`   O projeto foi gerado, mas você precisará instalar o wrapper manualmente.`);
         }
     }
 }

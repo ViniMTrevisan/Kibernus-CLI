@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import { initCommand } from './cli/commands/init';
+import { initCommand } from './cli/commands/init.js';
+import { loginCommand } from './cli/commands/login.js';
+import { logoutCommand } from './cli/commands/logout.js';
 
 const program = new Command();
 
 program
-    .name('kibernus')
+    .name('kybernus')
     .description('Open Core CLI for scaffolding production-ready backend and fullstack projects')
     .version('0.1.0');
 
@@ -21,5 +23,16 @@ program
     .option('--no-ai', 'Skip AI documentation generation')
     .option('--non-interactive', 'Run in non-interactive mode (requires all options)')
     .action(initCommand);
+
+program
+    .command('login')
+    .description('Authenticate with a Pro license key')
+    .option('-k, --key <key>', 'Pro license key')
+    .action(loginCommand);
+
+program
+    .command('logout')
+    .description('Remove Pro license and switch to Free mode')
+    .action(logoutCommand);
 
 program.parse();

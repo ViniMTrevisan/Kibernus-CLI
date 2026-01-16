@@ -50,13 +50,7 @@ export function registerHelpers(handlebars: typeof Handlebars): void {
             .replace(/[^A-Z0-9_]/g, '');
     });
 
-    // 6. Package path (para Java) - com.usuario.projeto -> com/usuario/projeto
-    handlebars.registerHelper('packagePath', (packageName: string) => {
-        if (!packageName) return '';
-        return packageName.replace(/\./g, '/');
-    });
-
-    // 7. Current year
+    // 6. Current year (packagePath is provided via context, not as a helper)
     handlebars.registerHelper('currentYear', () => {
         return new Date().getFullYear();
     });

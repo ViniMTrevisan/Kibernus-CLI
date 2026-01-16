@@ -1,4 +1,4 @@
-import { ProjectConfig, TemplateContext } from '../../models/config';
+import { ProjectConfig, TemplateContext } from '../../models/config.js';
 
 /**
  * Constrói o contexto para renderização de templates Handlebars
@@ -19,7 +19,7 @@ export function buildTemplateContext(config: ProjectConfig): TemplateContext {
     };
 }
 
-function toPascalCase(str: string): string {
+export function toPascalCase(str: string): string {
     if (!str) return '';
     return str
         .split(/[-_\s]+/)
@@ -27,18 +27,18 @@ function toPascalCase(str: string): string {
         .join('');
 }
 
-function toCamelCase(str: string): string {
+export function toCamelCase(str: string): string {
     if (!str) return '';
     const pascal = toPascalCase(str);
     return pascal.charAt(0).toLowerCase() + pascal.slice(1);
 }
 
-function toKebabCase(str: string): string {
+export function toKebabCase(str: string): string {
     if (!str) return '';
     return str.toLowerCase().replace(/[\s_]+/g, '-');
 }
 
-function toSnakeCase(str: string): string {
+export function toSnakeCase(str: string): string {
     if (!str) return '';
     return str.toLowerCase().replace(/[\s-]+/g, '_');
 }

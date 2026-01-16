@@ -1,8 +1,9 @@
 import * as clack from '@clack/prompts';
-import { LicenseTier, Stack, Architecture, BuildTool, ProjectConfig } from '../../models/config';
+import { ProjectConfig, LicenseTier, Stack, Architecture, BuildTool } from '../../models/config.js';
+import { toKebabCase } from '../../core/generator/context-builder.js';
 
 export async function runWizard(licenseTier: LicenseTier): Promise<ProjectConfig> {
-  clack.intro('🚀 Bem-vindo ao Kibernus');
+  clack.intro('🚀 Bem-vindo ao Kybernus');
 
   const answers = await clack.group(
     {
@@ -27,9 +28,9 @@ export async function runWizard(licenseTier: LicenseTier): Promise<ProjectConfig
             { value: 'nodejs-express', label: 'Node.js + Express' },
             ...(licenseTier === 'pro'
               ? [
-                  { value: 'python-fastapi', label: '🌟 Python FastAPI (Pro)' },
-                  { value: 'nestjs', label: '🌟 NestJS (Pro)' },
-                ]
+                { value: 'python-fastapi', label: '🌟 Python FastAPI (Pro)' },
+                { value: 'nestjs', label: '🌟 NestJS (Pro)' },
+              ]
               : []),
           ],
         }),
@@ -40,8 +41,7 @@ export async function runWizard(licenseTier: LicenseTier): Promise<ProjectConfig
         return clack.select({
           message: 'Build tool:',
           options: [
-            { value: 'maven', label: 'Maven' },
-            { value: 'gradle', label: 'Gradle' },
+            { value: 'maven', label: 'Maven (Gradle em breve)' },
           ],
         });
       },

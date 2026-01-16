@@ -41,4 +41,9 @@ tmp/
 temp/
 
 # User data (for testing locally)
-.kibernus/
+.kybernus/
+
+# Private Templates (Pro)
+templates/**/pro/
+
+templates/java-spring/pro/

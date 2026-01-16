@@ -1,18 +1,18 @@
-# Kibernus
+# Kybernus
 
 > Do grego *Kybernetes* (piloto/governador) — raiz etimológica de Kubernetes e Cybernetics
 
-**Kibernus** é uma CLI Open Core que acelera o desenvolvimento de projetos backend e fullstack, gerando código pronto para produção em minutos.
+**Kybernus** é uma CLI Open Core que acelera o desenvolvimento de projetos backend e fullstack, gerando código pronto para produção em minutos.
 
 ## 🚀 Quick Start
 
 ```bash
 # Com npx (recomendado - sempre usa a versão mais recente)
-npx kibernus init
+npx kybernus init
 
 # Ou instale globalmente
-npm install -g kibernus
-kibernus init
+npm install -g kybernus
+kybernus init
 ```
 
 ## ✨ Features
@@ -39,7 +39,7 @@ kibernus init
 
 ## 🎯 Como Funciona
 
-1. Execute `npx kibernus init`
+1. Execute `npx kybernus init`
 2. Responda ao wizard interativo
 3. Receba um projeto estruturado e pronto para desenvolver
 
@@ -74,7 +74,7 @@ meu-projeto/
 
 ## 🤝 Contribuindo
 
-Kibernus é **Open Core**:
+Kybernus é **Open Core**:
 - Templates Free são open source (neste repo)
 - Templates Pro são privados
 - Contribuições são bem-vindas! Veja [CONTRIBUTING.md](CONTRIBUTING.md)
@@ -86,10 +86,10 @@ Kibernus é **Open Core**:
 
 ## 🔗 Links
 
-- 🌐 **Website**: https://kibernus.dev
-- 📚 **Documentação**: https://docs.kibernus.dev
-- 💬 **Discord**: https://discord.gg/kibernus
-- 🐦 **Twitter**: [@kibernus](https://twitter.com/kibernus)
+- 🌐 **Website**: https://kybernus.dev
+- 📚 **Documentação**: https://docs.kybernus.dev
+- 💬 **Discord**: https://discord.gg/kybernus
+- 🐦 **Twitter**: [@kybernus](https://twitter.com/kybernus)
 
 ---
 
