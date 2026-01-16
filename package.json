@@ -1,0 +1,61 @@
+{
+  "name": "kibernus",
+  "version": "0.1.0",
+  "description": "Open Core CLI for scaffolding production-ready backend and fullstack projects",
+  "main": "dist/index.js",
+  "bin": {
+    "kibernus": "dist/index.js"
+  },
+  "scripts": {
+    "build": "rimraf dist && tsc",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "cli",
+    "scaffolding",
+    "boilerplate",
+    "generator",
+    "nextjs",
+    "java",
+    "spring-boot",
+    "nodejs",
+    "fastapi",
+    "nestjs",
+    "clean-architecture",
+    "hexagonal-architecture",
+    "devops",
+    "infrastructure"
+  ],
+  "author": "Vinit Revisan",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vinitrevisan/kibernus"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "dist",
+    "templates",
+    "README.md",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "@clack/prompts": "^0.11.0",
+    "@google/generative-ai": "^0.24.1",
+    "commander": "^14.0.2",
+    "fs-extra": "^11.3.3",
+    "handlebars": "^4.7.8"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^25.0.9",
+    "rimraf": "^6.1.2",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}
