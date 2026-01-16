@@ -31,11 +31,14 @@ export interface TemplateContext {
     projectName: string;
     projectNamePascalCase: string;
     projectNameKebabCase: string;
+    projectNameCamelCase: string;
+    projectNameSnakeCase: string;
     packageName?: string;
     packagePath?: string; // com/usuario/projeto
     stack: Stack;
     architecture?: Architecture;
     buildTool?: BuildTool;
+    currentYear: number;
 }
 
 export interface LicenseInfo {

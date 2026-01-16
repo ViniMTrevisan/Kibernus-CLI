@@ -93,4 +93,4 @@ Kibernus é **Open Core**:
 
 ---
 
-**Made with ❤️ by [Vinit Revisan](https://github.com/vinitrevisan)**
+**Made with ❤️ by [Vini Trevisan](https://github.com/vinitrevisan)**

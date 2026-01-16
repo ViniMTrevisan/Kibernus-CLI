@@ -1,5 +1,6 @@
 import * as clack from '@clack/prompts';
 import { runWizard } from '../prompts/wizard';
+import { ProjectGenerator } from '../../core/generator/project';
 import { LicenseTier } from '../../models/config';
 
 interface InitOptions {
@@ -29,8 +30,9 @@ export async function initCommand(options: InitOptions) {
     // Executar wizard interativo (ou usar options se non-interactive)
     const config = await runWizard(licenseTier);
 
-    console.log('\n📦 Configuração do projeto:', config);
+    // Gerar projeto
+    const generator = new ProjectGenerator();
+    await generator.generate(config, process.cwd());
 
-    // TODO: Gerar o projeto
-    clack.outro('✅ Em desenvolvimento - geração de projeto em breve!');
+    clack.outro('🎉 Projeto criado com sucesso! Bom desenvolvimento!');
 }
